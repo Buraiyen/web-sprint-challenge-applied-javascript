@@ -16,7 +16,6 @@ const Tabs = (topics) => {
   //
   const topicsEl = document.createElement('div');
   topicsEl.classList.add('topics');
-  console.log(topics)
   topics.forEach(topic => {
     const tabEl = document.createElement('div');
     tabEl.classList.add('tab');

@@ -23,15 +23,19 @@ const Card = (article) => {
 
   const headlineEl = document.createElement('div');
   headlineEl.classList.add('headline');
-  headlineEl.textContent = 'temp';
+  headlineEl.textContent = article.headline;
+  cardEl.appendChild(headlineEl)
 
   const authorEl = document.createElement('div');
   const imgContainerEl = document.createElement('div');
   const authorPhotoEl = document.createElement('img');
   const authorName = document.createElement('span');
-  authorName.textContent = 'Author'
+  authorName.textContent = article.authorName;
+  authorEl.classList.add('author');
+  authorPhotoEl.setAttribute('src', article.authorPhoto);
+  authorPhotoEl.classList.add('authorPhoto');
 
-  authorPhotoEl.setAttribute('src', '');
+  imgContainerEl.classList.add('img-container')
   imgContainerEl.appendChild(authorPhotoEl);
   authorEl.appendChild(imgContainerEl);
   authorEl.appendChild(authorName);
@@ -49,6 +53,37 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+  const URL = 'http://localhost:5001/api/articles'
+  axios.get(URL)
+       .then(res => {
+         const javascriptData = res.data.articles.javascript;
+         const bootstrapData = res.data.articles.bootstrap;
+         const technologyData = res.data.articles.technology;
+         const jqueryData = res.data.articles.jquery;
+         const nodeData = res.data.articles.node;
+         const cardContainer = document.querySelector(selector);
+
+         for (let key in javascriptData) {
+           const newCard = Card(javascriptData[key]);
+           cardContainer.appendChild(newCard);
+         }
+         for (let key in bootstrapData) {
+           const newCard = Card(bootstrapData[key]);
+           cardContainer.appendChild(newCard);
+         }
+         for (let key in technologyData) {
+           const newCard = Card(technologyData[key]);
+           cardContainer.appendChild(newCard);
+         }
+         for (let key in jqueryData) {
+           const newCard = Card(jqueryData[key]);
+           cardContainer.appendChild(newCard);
+         }
+         for (let key in nodeData) {
+           const newCard = Card(nodeData[key]);
+           cardContainer.appendChild(newCard);
+         }
+       })
 }
 
 export { Card, cardAppender }
