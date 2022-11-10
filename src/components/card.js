@@ -1,3 +1,4 @@
+import axios from 'axios';
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -17,6 +18,26 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+  const cardEl = document.createElement('div');
+  cardEl.classList.add('card');
+
+  const headlineEl = document.createElement('div');
+  headlineEl.classList.add('headline');
+  headlineEl.textContent = 'temp';
+
+  const authorEl = document.createElement('div');
+  const imgContainerEl = document.createElement('div');
+  const authorPhotoEl = document.createElement('img');
+  const authorName = document.createElement('span');
+  authorName.textContent = 'Author'
+
+  authorPhotoEl.setAttribute('src', '');
+  imgContainerEl.appendChild(authorPhotoEl);
+  authorEl.appendChild(imgContainerEl);
+  authorEl.appendChild(authorName);
+
+  cardEl.append(authorEl);
+  return cardEl;
 }
 
 const cardAppender = (selector) => {
